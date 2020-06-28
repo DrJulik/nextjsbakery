@@ -1,0 +1,23 @@
+.about {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	justify-content: center;
+	align-items: center;
+	height: 80vh;
+
+	img {
+		width: 50%;
+		box-shadow: #ccc 1px 1px 5px;
+	}
+
+	.description {
+		font-size: 1.5rem;
+		text-align: right;
+	}
+	h2 {
+		margin-bottom: 2rem;
+	}
+	p {
+		line-height: 2rem;
+	}
+}

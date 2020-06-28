@@ -1,0 +1,40 @@
+.navbar {
+	display: flex;
+	width: 100%;
+	min-height: 10%;
+	.logo h1 {
+		flex: 25%;
+		font-size: 2rem;
+		margin: 3rem;
+	}
+
+	.menu {
+		flex: 25%;
+		margin: 3rem;
+		ul {
+			display: flex;
+			justify-content: center;
+
+			li {
+				list-style: none;
+				margin: 0 2rem;
+				transition: all 0.5s ease 0s;
+
+				&:hover {
+					transform: translateY(2px);
+					opacity: 0.7;
+				}
+			}
+		}
+	}
+	a {
+		cursor: pointer;
+		font-size: 1.7rem;
+		margin: 3rem;
+		color: #4e4e4e;
+		text-decoration: none;
+	}
+	a.active {
+		text-decoration: underline;
+	}
+}

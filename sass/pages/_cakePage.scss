@@ -1,0 +1,49 @@
+.cake-page {
+	display: grid;
+	grid-template-columns: 2fr 1fr;
+	justify-items: center;
+	align-items: center;
+	margin: 2rem 0;
+	height: 80vh;
+	.product-description {
+		display: flex;
+		flex-direction: column;
+	}
+	img {
+		width: 50%;
+	}
+
+	h2 {
+		font-size: 1.8rem;
+		margin-bottom: 1rem;
+	}
+
+	p {
+		background-color: rgba(255, 238, 241, 0.54);
+		font-size: 1.4rem;
+		line-height: 1.5rem;
+		padding: 1rem;
+	}
+
+	button {
+		align-self: center;
+		color: #2b2b2b;
+		padding: 18px;
+		margin: 1.5rem;
+		border: 0.2px solid #868351;
+		border-radius: 6px;
+		display: inline-block;
+		background: rgba(255, 255, 255, 0.8);
+		font-size: 1.5rem;
+		font-family: "Merriweather", serif;
+		cursor: pointer;
+		transition: 0.3s linear;
+		box-shadow: rgba(0, 0, 0, 0.5) 1px 1px 5px;
+
+		&:hover {
+			background: rgba(46, 46, 46, 0.6);
+			border: 1px solid #e0e0e0;
+			color: #e4e4e4;
+		}
+	}
+}
