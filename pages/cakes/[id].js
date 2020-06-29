@@ -39,11 +39,22 @@ const Cake = ({ cake }) => {
 		</>
 	);
 };
-const { publicRuntimeConfig } = getConfig();
 
-export async function getServerSideProps(context) {
-	const { id } = context.query;
-	const res = await fetch(`${publicRuntimeConfig.API_URL}/cakes/${id}`);
+const { API_URL } = process.env;
+export async function getStaticPaths() {
+	const res = await fetch(`${API_URL}/cakes/`);
+	const cakes = await res.json();
+
+	const paths = cakes.map((cake) => ({
+		params: { id: cake.id.toString() },
+	}));
+
+	return { paths, fallback: false };
+}
+
+export async function getStaticProps({ params }) {
+	const { id } = params;
+	const res = await fetch(`${API_URL}/cakes/${id}`);
 	const data = await res.json();
 	return {
 		props: {
