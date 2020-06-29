@@ -40,7 +40,7 @@ const Cake = ({ cake }) => {
 	);
 };
 
-const { API_URL } = process.env;
+const { publicRuntimeConfig } = getConfig();
 export async function getStaticPaths() {
 	const res = await fetch(`${API_URL}/cakes/`);
 	const cakes = await res.json();
@@ -54,7 +54,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
 	const { id } = params;
-	const res = await fetch(`${API_URL}/cakes/${id}`);
+	const res = await fetch(`${publicRuntimeConfig.API_URL}/cakes/${id}`);
 	const data = await res.json();
 	return {
 		props: {
