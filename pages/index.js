@@ -3,7 +3,7 @@ import Cake from "components/Cake";
 import Controls from "components/Controls";
 
 export default function Home({ cakes, page, numberofCakes, context }) {
-	console.log(context);
+	console.log(cakes);
 	const lastPage = Math.ceil(numberofCakes / 3);
 	return (
 		<main className="cake-display">
@@ -12,13 +12,34 @@ export default function Home({ cakes, page, numberofCakes, context }) {
 					return <Cake key={cake.id} cake={cake} />;
 				})}
 			</div>
-			<Controls page={page} lastPage={lastPage} />
+			{/* <Controls page={page} lastPage={lastPage} /> */}
 		</main>
 	);
 }
-// export async function getServerSideProps({ query: { page = 1 } }) {
+export async function getServerSideProps({ query: { page = 1 } }) {
+	const { API_URL } = process.env;
+
+	const start = +page === 1 ? 0 : (+page - 1) * 3;
+	const numberOfCakesRes = await fetch(`${API_URL}/cakes/count`);
+	const numberofCakes = await numberOfCakesRes.json();
+
+	// const res = await fetch(`${API_URL}/cakes?_limit=3&_start=${start}`); for pagination
+	const res = await fetch(`${API_URL}/cakes`);
+	const data = await res.json();
+
+	return {
+		props: {
+			cakes: data,
+			page: +page,
+			numberofCakes,
+		},
+	};
+}
+
+// export async function getStaticProps() {
 // 	const { API_URL } = process.env;
 
+// 	let page = "1";
 // 	const start = +page === 1 ? 0 : (+page - 1) * 3;
 // 	const numberOfCakesRes = await fetch(`${API_URL}/cakes/count`);
 // 	const numberofCakes = await numberOfCakesRes.json();
@@ -29,31 +50,11 @@ export default function Home({ cakes, page, numberofCakes, context }) {
 // 	return {
 // 		props: {
 // 			cakes: data,
-// 			page: +page,
 // 			numberofCakes,
+// 			page: +page,
 // 		},
 // 	};
 // }
-
-export async function getStaticProps() {
-	const { API_URL } = process.env;
-
-	let page = "1";
-	const start = +page === 1 ? 0 : (+page - 1) * 3;
-	const numberOfCakesRes = await fetch(`${API_URL}/cakes/count`);
-	const numberofCakes = await numberOfCakesRes.json();
-
-	const res = await fetch(`${API_URL}/cakes?_limit=3&_start=${start}`);
-	const data = await res.json();
-
-	return {
-		props: {
-			cakes: data,
-			numberofCakes,
-			page: +page,
-		},
-	};
-}
 
 // export async function getStaticPaths() {
 // 	return {

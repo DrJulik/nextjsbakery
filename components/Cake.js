@@ -13,6 +13,7 @@ const Cake = ({ cake }) => {
 			title: cake.title,
 			description: cake.description,
 			price: cake.price,
+			image: cake.image.url,
 		};
 
 		addToCart(item);

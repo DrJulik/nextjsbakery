@@ -1,4 +1,4 @@
-import getConfig from "next/config";
+// import getConfig from "next/config";
 import fetch from "isomorphic-unfetch";
 import { NextSeo } from "next-seo";
 import { useContext } from "react";
@@ -40,7 +40,7 @@ const Cake = ({ cake }) => {
 	);
 };
 
-const { publicRuntimeConfig } = getConfig();
+// const { publicRuntimeConfig } = getConfig();
 export async function getStaticPaths() {
 	const res = await fetch(`${API_URL}/cakes/`);
 	const cakes = await res.json();

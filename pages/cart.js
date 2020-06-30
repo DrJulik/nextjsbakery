@@ -9,7 +9,6 @@ const Cart = () => {
 	const deleteItem = (id, e) => {
 		e.preventDefault();
 		deleteFromCart(id);
-		console.log(cart);
 	};
 	return (
 		<div className="cart-container">
@@ -22,7 +21,7 @@ const Cart = () => {
 				cart.map((item) => {
 					return (
 						<div key={item.id} className="cart-item">
-							<img src={API_URL + "/uploads/1_fd83deab76.jpeg"} alt="" />
+							<img src={API_URL + item.image} alt="" />
 							<div className="cart-item-description">
 								<h2 className="title">{item.title}</h2>
 								<p className="description">{item.description}</p>
