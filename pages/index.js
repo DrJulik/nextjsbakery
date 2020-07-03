@@ -1,18 +1,31 @@
 import fetch from "isomorphic-unfetch";
 import Cake from "components/Cake";
 import Controls from "components/Controls";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Home({ cakes, page, numberofCakes, context }) {
-	console.log(cakes);
 	const lastPage = Math.ceil(numberofCakes / 3);
 	return (
 		<main className="cake-display">
 			<div className="cakes">
 				{cakes.map((cake) => {
-					return <Cake key={cake.id} cake={cake} />;
+					return (
+						<AnimatePresence exitBeforeEnter>
+							<motion.div
+								initial={{ opacity: 0 }}
+								animate={{ opacity: 1 }}
+								transition={{ duration: 0.2 }}
+								exit={{ opacity: 0, x: 300 }}
+								key={cake.id}
+							>
+								<Cake key={cake.id} cake={cake} />
+							</motion.div>
+						</AnimatePresence>
+					);
 				})}
 			</div>
-			{/* <Controls page={page} lastPage={lastPage} /> */}
+
+			<Controls page={page} lastPage={lastPage} />
 		</main>
 	);
 }
@@ -23,8 +36,7 @@ export async function getServerSideProps({ query: { page = 1 } }) {
 	const numberOfCakesRes = await fetch(`${API_URL}/cakes/count`);
 	const numberofCakes = await numberOfCakesRes.json();
 
-	// const res = await fetch(`${API_URL}/cakes?_limit=3&_start=${start}`); for pagination
-	const res = await fetch(`${API_URL}/cakes`);
+	const res = await fetch(`${API_URL}/cakes?_limit=3&_start=${start}`);
 	const data = await res.json();
 
 	return {
@@ -35,32 +47,3 @@ export async function getServerSideProps({ query: { page = 1 } }) {
 		},
 	};
 }
-
-// export async function getStaticProps() {
-// 	const { API_URL } = process.env;
-
-// 	let page = "1";
-// 	const start = +page === 1 ? 0 : (+page - 1) * 3;
-// 	const numberOfCakesRes = await fetch(`${API_URL}/cakes/count`);
-// 	const numberofCakes = await numberOfCakesRes.json();
-
-// 	const res = await fetch(`${API_URL}/cakes?_limit=3&_start=${start}`);
-// 	const data = await res.json();
-
-// 	return {
-// 		props: {
-// 			cakes: data,
-// 			numberofCakes,
-// 			page: +page,
-// 		},
-// 	};
-// }
-
-// export async function getStaticPaths() {
-// 	return {
-// 	  paths: [
-// 		{ params: { ... } } // See the "paths" section below
-// 	  ],
-// 	  fallback: false
-// 	};
-//   }
