@@ -20,7 +20,7 @@ const Cake = ({ cake }) => {
 	};
 	return (
 		<div className="img-wrap">
-			<img src={API_URL + cake.image.url} alt={cake.title} />
+			<img src={cake.image.url} alt={cake.title} />
 			<div className="description">
 				<h1>{cake.title}</h1>
 

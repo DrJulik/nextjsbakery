@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function Home({ cakes, page, numberofCakes, context }) {
 	const lastPage = Math.ceil(numberofCakes / 3);
+	console.log(cakes);
 	return (
 		<main className="cake-display">
 			<div className="cakes">
@@ -16,9 +17,9 @@ export default function Home({ cakes, page, numberofCakes, context }) {
 								animate={{ opacity: 1 }}
 								transition={{ duration: 0.2 }}
 								exit={{ opacity: 0, x: 300 }}
-								key={cake.id}
+								key={cake._id}
 							>
-								<Cake key={cake.id} cake={cake} />
+								<Cake key={cake._id} cake={cake} />
 							</motion.div>
 						</AnimatePresence>
 					);

@@ -39,7 +39,7 @@ const Cart = () => {
 								exit={{ opacity: 0 }}
 								className="cart-item"
 							>
-								<img src={API_URL + item.image} alt="" />
+								<img src={item.image} alt="" />
 								<div className="cart-item-description">
 									<h2 className="title">{item.title}</h2>
 									<p className="description">{item.description}</p>

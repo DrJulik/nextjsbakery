@@ -29,7 +29,7 @@ const Cake = ({ cake }) => {
 		<>
 			<NextSeo {...SEO} />
 			<div className="cake-page">
-				<img src={API_URL + cake.image.url} alt={cake.title} />
+				<img src={cake.image.url} alt={cake.title} />
 				<div className="product-description">
 					<h2>{cake.title}</h2>
 					<p>{cake.description}</p>
@@ -47,7 +47,7 @@ export async function getStaticPaths() {
 	const cakes = await res.json();
 
 	const paths = cakes.map((cake) => ({
-		params: { id: cake.id.toString() },
+		params: { _id: cake._id.toString() },
 	}));
 
 	return { paths, fallback: false };
@@ -55,8 +55,8 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
 	const { API_URL } = process.env;
-	const { id } = params;
-	const res = await fetch(`${API_URL}/cakes/${id}`);
+	const { _id } = params;
+	const res = await fetch(`${API_URL}/cakes/${_id}`);
 	const data = await res.json();
 	return {
 		props: {
